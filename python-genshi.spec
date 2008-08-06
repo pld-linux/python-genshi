@@ -18,10 +18,13 @@ Source0:	http://ftp.edgewall.com/pub/genshi/Genshi-%{version}.tar.bz2
 # Source0-md5:	822942bbc3109da9f6b472eb8ea4e3a4
 URL:		http://genshi.edgewall.org/
 BuildRequires:	python-devel
+BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
-BuildRequires:	python-setuptools-devel
 BuildRequires:	rpmbuild(macros) >= 1.219
+%{!?with_speedups:BuildArch:	noarch}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%{!?with_speedups:%{expand:%%global py_sitedir %{py_sitescriptdir}}}
 
 %description
 Genshi is a Python library that provides an integrated set of
@@ -38,10 +41,10 @@ export CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__python} setup.py install \
-	--optimize=2 \
-	--skip-build \
+%{__python} setup.py \
 	%{!?with_speedups:--without-speedups} \
+	install \
+	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
@@ -54,6 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog
+
 %{py_sitedir}/genshi/*.py[co]
 %dir %{py_sitedir}/genshi/filters
 %{py_sitedir}/genshi/filters/*.py[co]
@@ -64,5 +68,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py_sitedir}/genshi/_speedups.so
 %endif
 
-# egg info is built with py 2.4 too
+# egg-info is built with setuptools under py 2.4 too
 %{py_sitedir}/Genshi-*.egg-info
