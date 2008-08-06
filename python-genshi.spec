@@ -1,9 +1,3 @@
-# TODO
-# - WARNING:
-#   An optional C extension could not be compiled, speedups will not be
-#   available:
-# - /usr/include/python2.4/pyport.h:616:2: #error "LONG_BIT definition appears wrong for platform (bad gcc/glibc config?)."
-#
 # Conditional build:
 %bcond_without	speedups	# skip optional C extension build
 %bcond_without	tests		# build without tests
@@ -11,7 +5,7 @@
 Summary:	Python toolkit for generation of output for the web
 Name:		python-genshi
 Version:	0.5.1
-Release:	0.1
+Release:	0.2
 License:	BSD
 Group:		Development/Languages/Python
 Source0:	http://ftp.edgewall.com/pub/genshi/Genshi-%{version}.tar.bz2
@@ -58,6 +52,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog
 
+%dir %{py_sitedir}/genshi
 %{py_sitedir}/genshi/*.py[co]
 %dir %{py_sitedir}/genshi/filters
 %{py_sitedir}/genshi/filters/*.py[co]
