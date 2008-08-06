@@ -5,7 +5,7 @@
 Summary:	Python toolkit for generation of output for the web
 Name:		python-genshi
 Version:	0.5.1
-Release:	0.2
+Release:	1
 License:	BSD
 Group:		Development/Languages/Python
 Source0:	http://ftp.edgewall.com/pub/genshi/Genshi-%{version}.tar.bz2
