@@ -5,13 +5,14 @@
 Summary:	Python toolkit for generation of output for the web
 Name:		python-genshi
 Version:	0.5.1
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages/Python
 Source0:	http://ftp.edgewall.com/pub/genshi/Genshi-%{version}.tar.bz2
 # Source0-md5:	822942bbc3109da9f6b472eb8ea4e3a4
 URL:		http://genshi.edgewall.org/
 BuildRequires:	python-devel
+BuildRequires:	python-devel-tools
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
