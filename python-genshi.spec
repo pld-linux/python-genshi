@@ -1,15 +1,18 @@
+# TODO:
+# - fails to build --with speedups
+#
 # Conditional build:
-%bcond_without	speedups	# skip optional C extension build
+%bcond_with	speedups	# skip optional C extension build
 %bcond_without	tests		# build without tests
 #
 Summary:	Python toolkit for generation of output for the web
 Name:		python-genshi
-Version:	0.5.1
-Release:	3
+Version:	0.6
+Release:	1
 License:	BSD
 Group:		Development/Languages/Python
-Source0:	http://ftp.edgewall.com/pub/genshi/Genshi-%{version}.tar.bz2
-# Source0-md5:	822942bbc3109da9f6b472eb8ea4e3a4
+Source0:	http://ftp.edgewall.com/pub/genshi/Genshi-%{version}.tar.gz
+# Source0-md5:	604e8b23b4697655d36a69c2d8ef7187
 URL:		http://genshi.edgewall.org/
 BuildRequires:	python-devel
 BuildRequires:	python-devel-tools
@@ -37,13 +40,13 @@ export CFLAGS="%{rpmcflags}"
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py \
-	%{!?with_speedups:--without-speedups} \
+	%{?with_speedups:--with-speedups} \
 	install \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
-%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
-%py_comp $RPM_BUILD_ROOT%{py_sitedir}
+%py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}
+%py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}
 %py_postclean
 
 %clean
@@ -53,16 +56,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog
 
-%dir %{py_sitedir}/genshi
-%{py_sitedir}/genshi/*.py[co]
-%dir %{py_sitedir}/genshi/filters
-%{py_sitedir}/genshi/filters/*.py[co]
-%dir %{py_sitedir}/genshi/template
-%{py_sitedir}/genshi/template/*.py[co]
+%dir %{py_sitescriptdir}/genshi
+%{py_sitescriptdir}/genshi/*.py[co]
+%dir %{py_sitescriptdir}/genshi/filters
+%{py_sitescriptdir}/genshi/filters/*.py[co]
+%dir %{py_sitescriptdir}/genshi/template
+%{py_sitescriptdir}/genshi/template/*.py[co]
 
 %if %{with speedups}
-%attr(755,root,root) %{py_sitedir}/genshi/_speedups.so
+%attr(755,root,root) %{py_sitescriptdir}/genshi/_speedups.so
 %endif
 
 # egg-info is built with setuptools under py 2.4 too
-%{py_sitedir}/Genshi-*.egg-info
+%{py_sitescriptdir}/Genshi-*.egg-info
