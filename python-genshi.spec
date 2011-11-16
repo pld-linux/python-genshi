@@ -35,7 +35,8 @@ textual content for output generation on the web.
 %build
 export CFLAGS="%{rpmcflags}"
 %{__python} setup.py build
-%{!?with_tests:%{__python} setup.py test}
+
+%{?with_tests:%{__python} setup.py test}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -55,7 +56,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog
-
 %dir %{py_sitescriptdir}/genshi
 %{py_sitescriptdir}/genshi/*.py[co]
 %dir %{py_sitescriptdir}/genshi/filters
