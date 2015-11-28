@@ -33,8 +33,7 @@ textual content for output generation on the web.
 %setup -q -n Genshi-%{version}
 
 %build
-export CFLAGS="%{rpmcflags}"
-%{__python} setup.py build
+%py_build
 
 %{?with_tests:%{__python} setup.py test}
 
