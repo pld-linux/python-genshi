@@ -18,7 +18,7 @@ BuildRequires:	python-devel
 BuildRequires:	python-devel-tools
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.710
 %{!?with_speedups:BuildArch:	noarch}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
