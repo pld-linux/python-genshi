@@ -1,10 +1,11 @@
 # TODO:
 # - fails to build --with speedups
+# - do not enable tests before ensuring they do not lock up builders
 #
 # Conditional build:
 %bcond_with	speedups	# skip optional C extension build
-%bcond_without	tests		# build without tests
-#
+%bcond_with	tests		# build without tests (lockup builders)
+
 Summary:	Python toolkit for generation of output for the web
 Name:		python-genshi
 Version:	0.6
