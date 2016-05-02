@@ -1,5 +1,6 @@
 # TODO:
 # - fails to build --with speedups
+# - --with speedups broken with new python macros
 # - do not enable tests before ensuring they do not lock up builders
 #
 # Conditional build:
@@ -8,13 +9,13 @@
 
 Summary:	Python toolkit for generation of output for the web
 Name:		python-genshi
-Version:	0.6
-Release:	6
+Version:	0.7
+Release:	0.1
 License:	BSD
 Group:		Development/Languages/Python
-Source0:	http://ftp.edgewall.com/pub/genshi/Genshi-%{version}.tar.gz
-# Source0-md5:	604e8b23b4697655d36a69c2d8ef7187
-URL:		http://genshi.edgewall.org/
+Source0:	http://ftp.edgewall.com/pub/genshi/Genshi-0.7.tar.gz
+# Source0-md5:	54e64dd69da3ec961f86e686e0848a82
+URL:		https://genshi.edgewall.org/
 BuildRequires:	python-devel
 BuildRequires:	python-devel-tools
 BuildRequires:	python-setuptools
@@ -40,11 +41,8 @@ textual content for output generation on the web.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__python} setup.py \
-	%{?with_speedups:--with-speedups} \
-	install \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
+%py_install \
+	%{?with_speedups:--with-speedups}
 
 %py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}
 %py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}
